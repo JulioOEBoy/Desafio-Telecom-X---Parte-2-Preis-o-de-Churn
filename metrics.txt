@@ -1,0 +1,15 @@
+LR Accuracy: 0.8017
+RF Accuracy: 0.7875
+
+Feature Importance:
+                           Feature  Importance
+3                    Charges.Total    0.191921
+1                           tenure    0.172634
+2                  Charges.Monthly    0.171372
+28  PaymentMethod_Electronic check    0.040146
+10     InternetService_Fiber optic    0.037168
+4                      gender_Male    0.029115
+25               Contract_Two year    0.029070
+13              OnlineSecurity_Yes    0.027092
+26            PaperlessBilling_Yes    0.026118
+5                      Partner_Yes    0.023390
