@@ -1,131 +1,65 @@
 Desafio Telecom X - Parte 2: Previsão de Churn
+Este projeto faz parte do programa Alura Oracle ONE e tem como objetivo prever o churn (cancelamento) de clientes da empresa fictícia Telecom X.
 
-Este projeto contém a solução para a Parte 2 do desafio Telecom X do programa Alura Oracle ONE, focado na construção de modelos preditivos para identificar clientes propensos a churn (evasão).
-
-Propósito da Análise
-
-O objetivo principal deste projeto é prever o churn de clientes da empresa fictícia Telecom X, utilizando variáveis relevantes. A capacidade de prever quais clientes estão em risco de cancelar seus serviços permite à empresa tomar ações proativas para retê-los, otimizando estratégias de marketing e atendimento ao cliente.
+Objetivo
+Identificar clientes com maior risco de cancelar seus serviços, ajudando a empresa a criar estratégias de retenção e melhorar o atendimento.
 
 Estrutura do Projeto
+telecom_x_part2.ipynb: Notebook principal com análise, modelagem e gráficos.
 
+dados_tratados.csv: Dados limpos e transformados da Parte 1.
 
+TelecomX_Data.json: Dataset original.
 
+feature_importance.png: Importância das variáveis no modelo.
 
-•
-telecom_x_part2.ipynb: O notebook principal com toda a análise, modelagem e visualizações.
+churn_distribution.png: Distribuição da variável alvo (Churn).
 
-•
-dados_tratados.csv: O conjunto de dados limpo e transformado da Parte 1 do desafio.
+churn_by_contract.png: Churn por tipo de contrato.
 
-•
-TelecomX_Data.json: O dataset original em formato JSON.
+churn_by_monthly_charges.png: Churn por faturamento mensal.
 
-•
-feature_importance.png: Gráfico mostrando a importância das variáveis para o modelo de Random Forest.
+metrics.txt: Métricas de avaliação dos modelos.
 
-•
-churn_distribution.png: Gráfico da distribuição da variável alvo (Churn).
+Preparação dos Dados
+Conversão do JSON para formato tabular.
 
-•
-churn_by_contract.png: Gráfico de churn por tipo de contrato.
+Limpeza de dados (remoção de valores ausentes e colunas irrelevantes).
 
-•
-churn_by_monthly_charges.png: Gráfico de churn por faturamento mensal.
+Classificação de variáveis em categóricas e numéricas.
 
-•
-metrics.txt: Arquivo de texto com as métricas de avaliação dos modelos.
+Codificação das variáveis (LabelEncoder e One-Hot Encoding).
 
-Descrição do Processo de Preparação dos Dados
+Divisão em treino (80%) e teste (20%).
 
-1.
-Carregamento e Normalização de JSON: Os dados brutos, fornecidos em formato JSON aninhado, foram carregados e normalizados para um formato tabular utilizando pd.json_normalize().
+Padronização das variáveis numéricas.
 
-2.
-Limpeza de Dados: Valores ausentes na coluna Charges.Total foram removidos, e a coluna customerID foi descartada por não ser preditiva.
+Modelagem
+Regressão Logística: Modelo simples e interpretável, usado como baseline.
 
-3.
-Classificação de Variáveis: As variáveis foram classificadas em categóricas e numéricas.
+Random Forest: Modelo robusto, com bom desempenho e menos propenso a overfitting.
 
-4.
-Codificação (Encoding):
+Principais Insights
+Distribuição de Churn: Base desbalanceada, com mais clientes que não cancelaram.
 
-•
-A variável alvo Churn foi codificada usando LabelEncoder (No para 0 e Yes para 1).
+Tipo de Contrato: Contratos mensais têm maior taxa de churn.
 
-•
-As demais variáveis categóricas foram transformadas usando One-Hot Encoding com pd.get_dummies() para evitar a criação de uma ordem artificial.
+Faturamento Mensal: Clientes com cobranças mais altas tendem a cancelar mais.
 
+Variáveis Importantes: Contract, tenure e Charges.Total foram as mais relevantes.
 
-
-5.
-Separação em Treino e Teste: Os dados foram divididos em conjuntos de treino (80%) e teste (20%) usando train_test_split com stratify=y para manter a proporção da classe Churn em ambos os conjuntos.
-
-6.
-Normalização: As variáveis numéricas do conjunto de treino e teste foram padronizadas usando StandardScaler para garantir que todas as features contribuam igualmente para o modelo.
-
-Justificativas para as Escolhas Feitas Durante a Modelagem
-
-•
-Regressão Logística: Escolhida por sua simplicidade, interpretabilidade e bom desempenho como baseline para problemas de classificação binária. É eficiente e fornece probabilidades de classe.
-
-•
-Random Forest Classifier: Selecionado por sua robustez, capacidade de lidar com não-linearidades e alta performance. É um modelo de ensemble que geralmente apresenta boa acurácia e é menos propenso a overfitting. A inclusão de class_weight="balanced" foi para mitigar o desbalanceamento da classe Churn.
-
-Exemplos de Gráficos e Insights Obtidos (Análise Exploratória de Dados - EDA)
-
-Durante a EDA, foram gerados gráficos para entender a distribuição do churn e a relação com outras variáveis. Os principais insights incluem:
-
-•
-Distribuição de Churn: A base de dados apresenta um desbalanceamento, com mais clientes que não cancelaram do que clientes que cancelaram.
-
-•
-Churn por Tipo de Contrato: Clientes com contratos mensais (Month-to-month) têm uma taxa de churn significativamente maior em comparação com contratos de longo prazo (One year ou Two year).
-
-•
-Churn por Faturamento Mensal: Clientes com faturamento mensal mais alto tendem a ter uma maior probabilidade de churn.
-
-•
-Importância das Variáveis: O modelo de Random Forest destacou Contract, tenure (tempo de permanência) e Charges.Total como as variáveis mais importantes para prever o churn.
-
-Instruções para Executar o Notebook
-
-Para executar este notebook, siga os passos abaixo:
-
-1.
+Como Executar
 Clone o repositório:
 
-Bash
-
-
+bash
 git clone <URL_DO_SEU_REPOSITORIO>
 cd <NOME_DO_SEU_REPOSITORIO>
+Instale as dependências:
 
-
-
-
-
-2.
-Instale as bibliotecas necessárias:
-
-Bash
-
-
+bash
 pip install pandas numpy matplotlib seaborn scikit-learn
-
-
-
-
-
-3.
 Baixe o dataset original:
-Certifique-se de ter o arquivo TelecomX_Data.json na mesma pasta do notebook. Você pode baixá-lo de https://raw.githubusercontent.com/ingridcristh/challenge2-data-science/main/TelecomX_Data.json.
+TelecomX_Data.json  
+Coloque-o na mesma pasta do notebook.
 
-4.
-Execute o notebook:
-Abra o arquivo telecom_x_part2.ipynb em um ambiente como Jupyter Notebook ou Google Colab e execute todas as células.
-
-Ao final da execução, os modelos serão treinados, avaliados e os gráficos de importância de variáveis e distribuição de churn serão gerados e salvos na mesma pasta.
-
-
-
-
+Execute o notebook em Jupyter Notebook ou Google Colab.
